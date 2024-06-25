@@ -375,6 +375,8 @@ class _MovieViewState extends State<MovieView> {
                       return ItemCategory(
                         image: categories[index].image,
                         title: categories[index].title,
+                        onPressed: () {
+                        },
                       );
                     },
                   ),

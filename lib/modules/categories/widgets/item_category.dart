@@ -33,13 +33,13 @@ class ItemCategory extends StatelessWidget {
         child: FrostedWidget(
           height: 90,
           width: 100,
-          color: Colors.black.withOpacity(0.1),
-          blur: 2,
+          color: Colors.black.withOpacity(0.4),
+          blur: 1,
           child: Text(
-            title,
+            title.toUpperCase(),
             style: Theme.of(context).textTheme.titleSmall!.copyWith(
               color: Colors.white,
-              fontWeight: FontWeight.w600,
+              fontWeight: FontWeight.w700,
             ),
           ),
         ),

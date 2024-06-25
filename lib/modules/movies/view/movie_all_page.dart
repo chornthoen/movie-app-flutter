@@ -1,10 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:movie_app/modules/categories/models/model_category.dart';
-import 'package:movie_app/modules/categories/views/categories_page.dart';
+import 'package:go_router/go_router.dart';
 import 'package:movie_app/modules/main/model/model_movie.dart';
 import 'package:movie_app/modules/main/widgets/banner_widget.dart';
+import 'package:movie_app/modules/movies/view/movie_detail_page.dart';
 import 'package:movie_app/modules/movies/widgets/list_movie.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
@@ -110,10 +110,10 @@ class _MovieAllPageState extends State<MovieAllPage> {
         controller: scrollController,
         child: Column(
           children: [
-            SizedBox(height: 126),
+            const SizedBox(height: 126),
             GridView.builder(
               shrinkWrap: true,
-              padding: EdgeInsets.symmetric(horizontal: 16),
+              padding: const EdgeInsets.symmetric(horizontal: 16),
               physics: const BouncingScrollPhysics(),
               itemCount: movieList.length,
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -126,6 +126,12 @@ class _MovieAllPageState extends State<MovieAllPage> {
                 return ListMovies(
                   image: movieList[index].image,
                   title: movieList[index].title,
+                  onPressed: () {
+                    context.push(
+                      MovieDetailPage.routePath,
+                      extra: movieList[index],
+                    );
+                  },
                 );
               },
             ),

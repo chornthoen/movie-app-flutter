@@ -39,8 +39,8 @@ class GridCategory extends StatelessWidget {
         child: FrostedWidget(
           height: 200,
           width: double.infinity,
-          color: Colors.black.withOpacity(0.3),
-          blur: 4,
+          color: Colors.black.withOpacity(0.4),
+          blur: 2,
           child: Text(
             title.toUpperCase(),
             style: Theme.of(context).textTheme.titleLarge!.copyWith(

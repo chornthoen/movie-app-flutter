@@ -55,7 +55,7 @@ class _MainPageState extends State<MainPage>
     scrollController.addListener(scrollListener);
     _animationController = AnimationController(
       vsync: this,
-      duration: const Duration(milliseconds: 500),
+      duration: const Duration(milliseconds: 400),
     );
     _animator = CurvedAnimation(
       parent: _animationController,

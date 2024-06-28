@@ -1,5 +1,6 @@
 import 'dart:async';
 import 'dart:ui';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
@@ -13,18 +14,19 @@ import 'package:movie_app/modules/main/widgets/full_screen_dialog.dart';
 import 'package:movie_app/modules/movies/view/movie_all_page.dart';
 import 'package:movie_app/modules/movies/view/movie_detail_page.dart';
 import 'package:movie_app/modules/movies/widgets/list_movie.dart';
+import 'package:movie_app/shared/colors/app_color.dart';
+import 'package:movie_app/shared/colors/app_theme.dart';
+import 'package:movie_app/shared/spacing/app_spacing.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
-class MovieView extends StatefulWidget {
-  const MovieView({super.key, required this.onTap});
-
-  final VoidCallback onTap;
+class HomePage extends StatefulWidget {
+  const HomePage({super.key});
 
   @override
-  State<MovieView> createState() => _MovieViewState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _MovieViewState extends State<MovieView> {
+class _HomePageState extends State<HomePage> {
   late ScrollController scrollController;
   late PageController _pageController;
   Color appBarColor = Colors.transparent;
@@ -53,7 +55,6 @@ class _MovieViewState extends State<MovieView> {
     dateTime();
     super.initState();
   }
-
 
   late Timer timer;
 
@@ -106,35 +107,32 @@ class _MovieViewState extends State<MovieView> {
         ),
         title: Row(
           children: [
-            GestureDetector(
-              onTap: widget.onTap,
-              child: Container(
-                padding: const EdgeInsets.all(12),
-                decoration: BoxDecoration(
-                  gradient:  LinearGradient(
-                    begin: Alignment.topCenter,
-                    end: Alignment.bottomCenter,
-                    colors: [
-                      Color(0xFF2E1371).withOpacity(0.5),
-                      Color(0xFF130B2B).withOpacity(0.3),
-                    ],
-                  ),
-                  shape: BoxShape.circle,
+            Container(
+              padding: const EdgeInsets.all(AppSpacing.md),
+              decoration: BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [
+                    AppColors.kPrimaryColor.withOpacity(0.5),
+                    AppColors.kBlue900.withOpacity(0.3),
+                  ],
                 ),
-                child: const Icon(
-                  PhosphorIconsRegular.alignLeft,
-                  color: Colors.white,
-                  size: 28,
-                ),
+                shape: BoxShape.circle,
+              ),
+              child: const Icon(
+                PhosphorIconsRegular.alignLeft,
+                color: Colors.white,
+                size: AppSpacing.xlg + 4,
               ),
             ),
-            const SizedBox(width: 10),
+            const SizedBox(width: 8),
             Text(
               text,
-              style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.w700,
-                  ),
+              style: context.textTheme.titleMedium!.copyWith(
+                color: Colors.white,
+                fontWeight: FontWeight.w700,
+              ),
             ),
             const Spacer(),
             InkWell(
@@ -161,7 +159,7 @@ class _MovieViewState extends State<MovieView> {
                 color: Colors.deepPurple.withOpacity(0.6),
                 padding: const EdgeInsets.all(8),
                 child: const Icon(
-                  PhosphorIconsRegular.bell,
+                  PhosphorIconsRegular.heart,
                   color: Colors.white,
                 ),
               ),
@@ -173,7 +171,7 @@ class _MovieViewState extends State<MovieView> {
         controller: scrollController,
         child: Stack(
           children: [
-            Container(
+            SizedBox(
               height: MediaQuery.of(context).size.height * 0.8,
               child: PageView.builder(
                 controller: _pageController,
@@ -224,7 +222,7 @@ class _MovieViewState extends State<MovieView> {
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                SizedBox(height: 130),
+                const SizedBox(height: 130),
                 Padding(
                   padding: const EdgeInsets.all(12),
                   child: Text(
@@ -244,7 +242,7 @@ class _MovieViewState extends State<MovieView> {
                             const Duration(milliseconds: 1200),
                         height: 400,
                         viewportFraction: 0.75,
-                        autoPlay: true,
+                        autoPlay: false,
                         enlargeCenterPage: true,
                         onPageChanged: (index, reason) {
                           setState(() {
@@ -326,6 +324,7 @@ class _MovieViewState extends State<MovieView> {
                                     ),
                                     blur: 3,
                                     color: Colors.white.withOpacity(0.01),
+                                    height: 48,
                                     child: Text(
                                       movieList[index].title,
                                       textAlign: TextAlign.center,
@@ -336,7 +335,6 @@ class _MovieViewState extends State<MovieView> {
                                             color: Colors.white,
                                           ),
                                     ),
-                                    height: 48,
                                   ),
                                 ),
                               ],
@@ -375,8 +373,7 @@ class _MovieViewState extends State<MovieView> {
                       return ItemCategory(
                         image: categories[index].image,
                         title: categories[index].title,
-                        onPressed: () {
-                        },
+                        onPressed: () {},
                       );
                     },
                   ),
@@ -441,7 +438,7 @@ class _MovieViewState extends State<MovieView> {
                     },
                   ),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: AppSpacing.xxxlg * 2),
               ],
             ),
           ],

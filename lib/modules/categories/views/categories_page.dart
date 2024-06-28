@@ -6,6 +6,9 @@ import 'package:movie_app/modules/categories/models/model_category.dart';
 import 'package:movie_app/modules/categories/widgets/grid_category.dart';
 import 'package:movie_app/modules/main/widgets/banner_widget.dart';
 import 'package:movie_app/modules/movies/view/movie_all_page.dart';
+import 'package:movie_app/shared/colors/app_color.dart';
+import 'package:movie_app/shared/colors/app_theme.dart';
+import 'package:movie_app/shared/spacing/app_spacing.dart';
 import 'package:phosphor_flutter/phosphor_flutter.dart';
 
 class CategoriesPage extends StatefulWidget {
@@ -43,7 +46,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF1F1D2B),
+      backgroundColor: AppColors.kBackgroundColor,
       extendBodyBehindAppBar: true,
       extendBody: true,
       appBar: AppBar(
@@ -60,33 +63,13 @@ class _CategoriesPageState extends State<CategoriesPage> {
             ),
           ),
         ),
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.pop(context);
-          },
-          child: Container(
-            margin: const EdgeInsets.all(10),
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: const Color(0xFF2E1371),
-                width: 1,
-              ),
-              shape: BoxShape.circle,
-            ),
-            child: const Icon(
-              PhosphorIconsBold.arrowLeft,
-              color: Colors.white,
-            ),
-          ),
-        ),
-        titleSpacing: 0,
         centerTitle: false,
         title: Text(
-          'Categories All',
-          style: Theme.of(context).textTheme.titleMedium!.copyWith(
-                color: Colors.white,
-                fontWeight: FontWeight.w700,
-              ),
+          'Categories'.toUpperCase(),
+          style: context.textTheme.titleMedium!.copyWith(
+            color: Colors.white,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         actions: [
           InkWell(
@@ -110,7 +93,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
         controller: scrollController,
         child: Column(
           children: [
-            SizedBox(height: 140),
+            const SizedBox(height: 140),
             ListView.builder(
               itemCount: categories.length,
               shrinkWrap: true,
@@ -128,6 +111,7 @@ class _CategoriesPageState extends State<CategoriesPage> {
                 );
               },
             ),
+            const SizedBox(height: AppSpacing.xxxlg * 2),
           ],
         ),
       ),

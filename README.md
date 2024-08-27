@@ -1,5 +1,7 @@
 # Movie App
 
+![movies](https://github.com/user-attachments/assets/87b6af6a-d070-4a6c-ad1e-08b3f094c76a)
+
 ![coverage][coverage_badge]
 [![style: very good analysis][very_good_analysis_badge]][very_good_analysis_link]
 [![License: MIT][license_badge]][license_link]

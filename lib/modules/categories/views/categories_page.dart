@@ -21,41 +21,17 @@ class CategoriesPage extends StatefulWidget {
 }
 
 class _CategoriesPageState extends State<CategoriesPage> {
-  late ScrollController scrollController;
-  Color appBarColor = Colors.transparent;
-
-  void scrollListener() {
-    if (scrollController.offset > 50) {
-      setState(() {
-        appBarColor = Colors.black.withOpacity(0.1);
-      });
-    } else {
-      setState(() {
-        appBarColor = Colors.transparent;
-      });
-    }
-  }
-
-  @override
-  void initState() {
-    scrollController = ScrollController();
-    scrollController.addListener(scrollListener);
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.kBackgroundColor,
-      extendBodyBehindAppBar: true,
-      extendBody: true,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: appBarColor,
+        backgroundColor: Colors.transparent,
         flexibleSpace: ClipRect(
           child: Container(
             decoration: BoxDecoration(
-              color: appBarColor,
+              color: Colors.black.withOpacity(0.1),
             ),
             child: BackdropFilter(
               filter: ImageFilter.blur(sigmaX: 5, sigmaY: 5),
@@ -90,10 +66,8 @@ class _CategoriesPageState extends State<CategoriesPage> {
         ],
       ),
       body: SingleChildScrollView(
-        controller: scrollController,
         child: Column(
           children: [
-            const SizedBox(height: 140),
             ListView.builder(
               itemCount: categories.length,
               shrinkWrap: true,

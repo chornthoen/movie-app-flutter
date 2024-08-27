@@ -79,6 +79,7 @@ class _MainPageState extends State<MainPage>
               topRight: 0,
               topLeft: 0,
               height: 70,
+              blur: 4,
               decoration: BoxDecoration(
                 color: Colors.black.withOpacity(0.5),
               ),

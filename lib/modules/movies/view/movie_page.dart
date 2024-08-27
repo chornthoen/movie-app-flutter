@@ -3,11 +3,12 @@ import 'dart:ui';
 
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:intl/intl.dart';
 import 'package:movie_app/modules/categories/models/model_category.dart';
-import 'package:movie_app/modules/categories/views/categories_page.dart';
 import 'package:movie_app/modules/categories/widgets/item_category.dart';
+import 'package:movie_app/modules/main/blocs/navigation_cubit.dart';
 import 'package:movie_app/modules/main/model/model_movie.dart';
 import 'package:movie_app/modules/main/widgets/banner_widget.dart';
 import 'package:movie_app/modules/main/widgets/full_screen_dialog.dart';
@@ -176,7 +177,7 @@ class _HomePageState extends State<HomePage> {
               child: PageView.builder(
                 controller: _pageController,
                 itemCount: movieList.length,
-                physics: NeverScrollableScrollPhysics(),
+                physics: const NeverScrollableScrollPhysics(),
                 onPageChanged: (index) {
                   setState(() {
                     current = index;
@@ -193,6 +194,8 @@ class _HomePageState extends State<HomePage> {
                       ),
                     ),
                     child: FrostedWidget(
+                      topRight: 0,
+                      topLeft: 0,
                       height: 500,
                       width: double.infinity,
                       blur: 8,
@@ -238,11 +241,12 @@ class _HomePageState extends State<HomePage> {
                   children: [
                     CarouselSlider(
                       options: CarouselOptions(
+                        autoPlayInterval: const Duration(seconds: 10),
                         autoPlayAnimationDuration:
                             const Duration(milliseconds: 1200),
                         height: 400,
                         viewportFraction: 0.75,
-                        autoPlay: false,
+                        autoPlay: true,
                         enlargeCenterPage: true,
                         onPageChanged: (index, reason) {
                           setState(() {
@@ -251,7 +255,6 @@ class _HomePageState extends State<HomePage> {
                                 () {
                               _pageController.jumpToPage(index);
                             });
-                            // _pageController.jumpToPage(index);
                             current = index;
                           });
                         },
@@ -356,7 +359,7 @@ class _HomePageState extends State<HomePage> {
                 LabelAndAction(
                   text: 'Categories',
                   onPressed: () {
-                    context.push(CategoriesPage.routePath);
+                    context.read<NavigationCubit>().changeIndex(1);
                   },
                 ),
                 SizedBox(
@@ -460,14 +463,14 @@ class _HomePageState extends State<HomePage> {
         ),
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(4),
-          gradient: LinearGradient(
+          gradient: const LinearGradient(
             colors: [
-              const Color(0xFF2E1371),
-              const Color(0xFF12CDD9),
+              Color(0xFF2E1371),
+              Color(0xFF12CDD9),
             ],
           ),
           color: current == index
-              ? Color(0xFF2E1371)
+              ? const Color(0xFF2E1371)
               : Colors.white.withOpacity(0.5),
         ),
         curve: Curves.easeInOut,

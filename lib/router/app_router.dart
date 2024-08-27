@@ -1,4 +1,9 @@
 import 'package:go_router/go_router.dart';
+import 'package:movie_app/modules/authen/views/create_password_page.dart';
+import 'package:movie_app/modules/authen/views/forget_password_page.dart';
+import 'package:movie_app/modules/authen/views/login_page.dart';
+import 'package:movie_app/modules/authen/views/otp_page.dart';
+import 'package:movie_app/modules/authen/views/register_page.dart';
 import 'package:movie_app/modules/categories/views/categories_page.dart';
 import 'package:movie_app/modules/main/model/model_movie.dart';
 import 'package:movie_app/modules/main/view/main_page.dart';
@@ -38,6 +43,26 @@ class AppRouter {
       GoRoute(
         path: ProfilePage.routePath,
         builder: (context, state) => const ProfilePage(),
+      ),
+      GoRoute(
+        path: CreatePasswordPage.routePath,
+        builder: (context, state) => const CreatePasswordPage(),
+      ),
+      GoRoute(
+        path: ForgetPasswordPage.routePath,
+        builder: (context, state) => const ForgetPasswordPage(),
+      ),
+      GoRoute(
+        path: LoginPage.routePath,
+        builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: OtpPage.routePath,
+        builder: (context, state) => const OtpPage(),
+      ),
+      GoRoute(
+        path: RegisterPage.routePath,
+        builder: (context, state) => const RegisterPage(),
       ),
     ],
   );
